@@ -24,6 +24,23 @@
       href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
       rel="stylesheet"
     />
+    <style>
+      @keyframes loader-bar {
+        0% {
+          transform: translateX(-100%);
+        }
+        50% {
+          transform: translateX(100%);
+        }
+        100% {
+          transform: translateX(-100%);
+        }
+      }
+
+      .animate-loader-bar {
+        animation: loader-bar 2s ease-in-out infinite;
+      }
+    </style>
     <script>
       tailwind.config = {
         theme: {
@@ -69,7 +86,7 @@
   </head>
   <body class="!container font-dm-sans bg-c_white relative">
     <header
-      class="sticky top-0 z-40 px-5 py-3 md:px-7 md:py-5 lg:px-10 2xl:px-32 2xl:py-5 flex flex-row items-center justify-between bg-c_white"
+      class="sticky top-0 z-40 px-5 py-3 md:px-7 md:py-5 lg:px-10 2xl:px-32 2xl:py-5 hidden flex-row items-center justify-between bg-c_white"
     >
       <div class="flex flex-row items-center justify-center gap-10">
         <div class="flex flex-row items-center gap-2">
@@ -83,17 +100,23 @@
         </div>
       </div>
       <div class="flex flex-row items-center gap-10">
-        <h1 class="hidden xl:flex text-c_gray font-medium text-lg">Support</h1>
+        <button
+          class="hidden relative font-dm lg:flex text-c_silver before:absolute before:w-[0%] before:h-0.5 before:top-[-2px] before:left-0 before:bg-c_gray before:duration-300 before:rounded-[20px] hover:before:w-[100%] after:absolute after:w-[0%] after:h-0.5 after:bottom-[-2px] after:right-0 after:bg-c_gray after:duration-300 after:rounded-[20px] hover:after:w-[100%]"
+        >
+          Support
+        </button>
         <div class="hidden xl:flex flex-row items-center gap-3">
           <i class="fa-solid fa-globe text-lg text-c_gray"></i>
-          <h1 class="text-c_gray font-medium text-lg">Language</h1>
+          <h1 class="text-c_gray font-medium text-lg cursor-pointer">
+            Language
+          </h1>
         </div>
         <i
           id="modeDesk"
           class="fa-solid fa-moon hidden lg:flex text-c_gray text-2xl cursor-pointer"
         ></i>
         <button
-          class="hidden lg:flex font-medium text-c_black border-2 border-c_gray rounded-3xl px-3 py-1.5"
+          class="hidden lg:flex font-medium text-c_black border-2 border-c_gray hover:text-white hover:bg-c_gray duration-300 rounded-3xl px-3 py-1.5"
         >
           List your property
         </button>
@@ -106,7 +129,7 @@
             id="notif"
             class="fa-solid fa-circle fa-beat text-[10px] md:text-xs text-green-500 absolute md:top-4 top-3 md:right-[125px] lg:right-[105px] 2xl:right-[190px] right-[120px]"
           ></i>
-          <img src="./images/avatar.png" alt="" class="" />
+          <img src="./images/avatar.png" alt="" class="cursor-pointer" />
           <i
             id="bar"
             class="fa-solid fa-bars text-xl lg:hidden text-c_black cursor-pointer"
@@ -158,756 +181,74 @@
         </div>
       </div>
     </header>
-    <main>
-      <!-- HERO - PART 1 -->
-      <section
-        class="flex flex-col px-5 py-3 md:px-7 md:py-5 lg:px-10 2xl:px-20 2xl:py-5"
-      >
-        <img
-          src="./images/hero-bg.png"
-          alt=""
-          class="opacity-50 h-[600px] object-cover rounded-3xl relative"
-        />
+    <div id="loader">
+      <div class="flex justify-center items-center flex-col h-[96vh] w-full">
+        <div class="text-2xl mb-5 font-medium text-c_black">Loading...</div>
         <div
-          class="flex flex-col items-center justify-center absolute gap-5 left-0 right-0 top-44 lg:top-60"
-        >
-          <h1
-            class="text-6xl w-1/2 text-center xl:text-8xl font-bold text-c_black"
-          >
-            Car rentals
-          </h1>
-          <p class="text-c_black text-center font-medium w-2/3 text-2xl">
-            Find and book a great experience.
-          </p>
-          <button
-            class="px-5 py-2 bg-c_blue text-lg font-medium text-c_white2 rounded-3xl"
-          >
-            Start your search
-          </button>
-        </div>
-      </section>
-
-      <!-- PART 2 -->
-      <section
-      class="px-5 py-3 md:px-7 md:py-5 lg:px-10 2xl:px-32 2xl:py-5 mt-10 flex flex-col gap-5"
-    >
-      <div class="flex flex-col items-start gap-3">
-        <h1 class="w-1/2 text-4xl text-c_black font-bold js-animate">Popular destinations</h1>
-        <p class="text-c_gray text-lg js-animate">for car rentals</p>
+          class="w-20 lg:w-36 h-2.5 rounded bg-c_black animate-loader-bar"
+        ></div>
       </div>
-      <div
-        class="flex flex-row items-center overflow-x-scroll overflow-y-hidden gap-5 lg:justify-between scroll-smooth"
+    </div>
+    <div id="main" class="relative">
+      <form
+        id="form"
+        class="flex flex-col items-center justify-center h-screen w-screen relative"
       >
-        <!-- 1 -->
-        <div class="flex flex-col gap-5 js-animate">
-          <img src="./images/paris.png" alt="Paris" class="rounded-md shadow-md" />
-          <div class="flex flex-col items-start gap-1">
-            <h1 class="text-3xl font-bold text-c_black">Paris</h1>
-            <p class="text-c_gray font-medium w-80">
-              Car rentals in 86 pickup locations
-            </p>
-          </div>
-        </div>
-    
-        <!-- 2 -->
-        <div class="flex flex-col gap-5 js-animate">
-          <img src="./images/london.png" alt="London" class="rounded-md shadow-md" />
-          <div class="flex flex-col items-start gap-1">
-            <h1 class="text-3xl font-bold text-c_black">London</h1>
-            <p class="text-c_gray font-medium w-80">
-              Car rentals in 86 pickup locations
-            </p>
-          </div>
-        </div>
-    
-        <!-- 3 -->
-        <div class="flex flex-col gap-5 js-animate">
-          <img src="./images/ams.png" alt="Amsterdam" class="rounded-md shadow-md" />
-          <div class="flex flex-col items-start gap-1">
-            <h1 class="text-3xl font-bold text-c_black">Ams</h1>
-            <p class="text-c_gray font-medium w-80">
-              Car rentals in 86 pickup locations
-            </p>
-          </div>
-        </div>
-    
-        <!-- 4 -->
-        <div class="flex flex-col gap-5 js-animate">
-          <img src="./images/milan.png" alt="Milan" class="rounded-md shadow-md" />
-          <div class="flex flex-col items-start gap-1">
-            <h1 class="text-3xl font-bold text-c_black">Milan</h1>
-            <p class="text-c_gray font-medium w-80">
-              Car rentals in 86 pickup locations
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="js-animate">
-        <button
-          class="font-medium text-c_black text-lg flex flex-row items-center gap-4 px-6 py-2 border-2 rounded-3xl hover:bg-gray-100 transition-colors duration-300 ease-in-out"
+        <div
+          class="bg-[#B8C2CC] hidden lg:flex opacity-40 rounded-3xl w-60 h-60 absolute -z-10 top-20 m-auto left-0 right-80"
+        ></div>
+        <div
+          class="flex flex-col gap-10 px-5 md:px-10 py-10 rounded-lg bg-c_white shadow-2xl"
         >
-          <p>Show more</p>
-          <i class="fa-solid fa-angle-right text-c_gray"></i>
-        </button>
-      </div>
-    </section>
-    
-
-      <!-- PART 3 -->
-
-      <section
-        class="px-5 py-3 md:px-7 md:py-5 lg:px-10 2xl:px-32 2xl:py-5 mt-20 flex flex-col lg:flex-row lg:items-center lg:justify-between gap-10"
-      >
-        <div class="flex flex-col gap-10 lg:gap-16">
-          <div class="flex flex-col gap-5">
-            <p class="text-c_gray font-bold text-lg">
-              supercharge your planning powers
-            </p>
-            <h1 class="w-3/4 sm:w-60 lg:w-80 text-4xl text-c_black font-bold">
-              Rent a car in minutes with Fleet
-            </h1>
-          </div>
-          <div class="flex flex-col gap-5">
-            <p class="w-80 lg:w-96 text-c_gray text-lg">
-              Stacks is a production-ready library of stackable content blocks
-              built in React Native.
-            </p>
-            <div
-              class="px-4 py-2 w-[320px] border-2 border-c_silver rounded-3xl flex flex-row items-center justify-between"
-            >
-              <input
-                type="text"
-                placeholder="Enter your phone number"
-                class="placeholder:text-c_gray bg-transparent outline-none"
-              />
-              <i
-                class="fa-solid fa-arrow-right text-c_white bg-c_blue px-3 py-2.5 rounded-3xl active:opacity-80 cursor-pointer"
-              ></i>
-            </div>
-          </div>
-        </div>
-        <div>
-          <img src="./images/phone mockup.png" alt="" class="flex sm:hidden" />
           <img
-            src="./images/phone mockup desk.png"
-            alt=""
-            class="hidden sm:flex"
+            src="./images/Fleet symbol.svg"
+            width="100"
+            class="ml-auto mr-auto"
           />
-        </div>
-      </section>
-
-      <!-- PART 4 -->
-
-      <section
-        class="px-5 py-3 md:px-7 md:py-5 lg:px-10 2xl:px-32 2xl:py-5 mt-10 flex flex-col gap-5 lg:gap-10"
-      >
-        <div class="flex flex-row items-center justify-between">
-          <div class="flex flex-col items-start gap-3">
-            <h1 class="text-4xl text-c_black font-bold">Explore nearby</h1>
-            <p class="text-c_gray text-lg">for car rentals</p>
-          </div>
-          <div class="flex flex-row items-center gap-5">
-            <i
-              class="fa-solid fa-arrow-left text-c_black px-3.5 py-3 border-2 border-c_gray rounded-3xl"
-            ></i>
-            <i
-              class="fa-solid fa-arrow-right text-c_black px-3.5 py-3 border-2 border-c_gray rounded-3xl"
-            ></i>
-          </div>
-        </div>
-        <div class="flex flex-col gap-10">
-          <div
-            class="flex flex-row items-center overflow-x-scroll gap-5 lg:justify-between"
-          >
-            <!-- 1.1 -->
-
-            <div class="flex flex-col gap-5">
-              <img src="./images/paris.png" alt="" class="" />
-              <div class="flex flex-col items-start gap-1">
-                <h1 class="text-3xl font-bold text-c_black">Paris</h1>
-                <p class="text-c_gray font-medium w-80">
-                  Car rentals in 86 pickup locations
-                </p>
-              </div>
-            </div>
-
-            <!-- 1. 2 -->
-
-            <div class="flex flex-col gap-5">
-              <img src="./images/london.png" alt="" class="" />
-              <div class="flex flex-col items-start gap-1">
-                <h1 class="text-3xl font-bold text-c_black">London</h1>
-                <p class="text-c_gray font-medium w-80">
-                  Car rentals in 86 pickup locations
-                </p>
-              </div>
-            </div>
-
-            <!-- 1. 3 -->
-
-            <div class="flex flex-col gap-5">
-              <img src="./images/ams.png" alt="" class="" />
-              <div class="flex flex-col items-start gap-1">
-                <h1 class="text-3xl font-bold text-c_black">Ams</h1>
-                <p class="text-c_gray font-medium w-80">
-                  Car rentals in 86 pickup locations
-                </p>
-              </div>
-            </div>
-          </div>
-          <div
-            class="flex flex-row items-center overflow-x-scroll gap-5 lg:justify-between"
-          >
-            <!-- 2. 1 -->
-
-            <div class="flex flex-col gap-5">
-              <img src="./images/ams.png" alt="" class="" />
-              <div class="flex flex-col items-start gap-1">
-                <h1 class="text-3xl font-bold text-c_black">Ams</h1>
-                <p class="text-c_gray font-medium w-80">
-                  Car rentals in 86 pickup locations
-                </p>
-              </div>
-            </div>
-
-            <!-- 2. 2 -->
-
-            <div class="flex flex-col gap-5">
-              <img src="./images/milan.png" alt="" class="" />
-              <div class="flex flex-col items-start gap-1">
-                <h1 class="text-3xl font-bold text-c_black">Milan</h1>
-                <p class="text-c_gray font-medium w-80">
-                  Car rentals in 86 pickup locations
-                </p>
-              </div>
-            </div>
-
-            <!-- 2. 3 -->
-
-            <div class="flex flex-col gap-5">
-              <img src="./images/london.png" alt="" class="" />
-              <div class="flex flex-col items-start gap-1">
-                <h1 class="text-3xl font-bold text-c_black">London</h1>
-                <p class="text-c_gray font-medium w-80">
-                  Car rentals in 86 pickup locations
-                </p>
-              </div>
-            </div>
-          </div>
-          <div
-            class="flex flex-row items-center overflow-x-scroll gap-5 lg:justify-between"
-          >
-            <!-- 3. 1 -->
-
-            <div class="flex flex-col gap-5">
-              <img src="./images/ams.png" alt="" class="" />
-              <div class="flex flex-col items-start gap-1">
-                <h1 class="text-3xl font-bold text-c_black">Ams</h1>
-                <p class="text-c_gray font-medium w-80">
-                  Car rentals in 86 pickup locations
-                </p>
-              </div>
-            </div>
-
-            <!-- 3. 2 -->
-
-            <div class="flex flex-col gap-5">
-              <img src="./images/milan.png" alt="" class="" />
-              <div class="flex flex-col items-start gap-1">
-                <h1 class="text-3xl font-bold text-c_black">Milan</h1>
-                <p class="text-c_gray font-medium w-80">
-                  Car rentals in 86 pickup locations
-                </p>
-              </div>
-            </div>
-
-            <!-- 3. 3 -->
-
-            <div class="flex flex-col gap-5">
-              <img src="./images/london.png" alt="" class="" />
-              <div class="flex flex-col items-start gap-1">
-                <h1 class="text-3xl font-bold text-c_black">London</h1>
-                <p class="text-c_gray font-medium w-80">
-                  Car rentals in 86 pickup locations
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="">
-          <button
-            class="font-medium text-c_black text-lg flex flex-row items-center gap-4 px-6 py-2 border-2 rounded-3xl"
-          >
-            <p>Show more</p>
-            <i class="fa-solid fa-angle-right text-c_gray"></i>
-          </button>
-        </div>
-      </section>
-
-      <!-- PART 5 -->
-
-      <section
-        class="px-5 py-3 md:px-7 md:py-5 lg:px-10 2xl:px-32 2xl:py-5 mt-10 flex flex-col gap-10 lg:gap-20"
-      >
-        <div class="flex flex-col items-center gap-9">
-          <div class="flex flex-col items-center gap-1">
-            <p class="text-c_gray text-lg font-bold">
-              meet stacks design system
-            </p>
-            <h1 class="text-4xl text-c_black font-bold">Amazing Services</h1>
-          </div>
-          <button
-            class="font-bold text-c_white2 bg-c_blue text-lg flex flex-row items-center gap-4 px-6 py-2 rounded-3xl"
-          >
-            <p>Contact us</p>
-          </button>
-        </div>
-        <div
-          class="flex flex-col items-start gap-5 lg:flex-row overflow-x-scroll"
-        >
-          <div
-            class="flex flex-col gap-5 w-full px-7 py-8 rounded-lg bg-c_white3"
-          >
-            <i
-              class="fa-solid fa-circle text-[#FA8F54] flex 2xl:hidden text-[35px]"
-            ></i>
-            <i
-              class="fa-solid fa-face-smile text-[#FA8F54] hidden 2xl:flex text-[35px]"
-            ></i>
+          <div class="flex flex-col gap-7">
             <div class="flex flex-col gap-3">
-              <h1 class="text-c_black text-xl font-medium">
-                Discovery & Strategy
-              </h1>
-              <p class="text-c_gray font-medium w-[270px]">
-                We realize ideas from simple to complex, everything becomes easy
-                to use and reach the most potential customers.
-              </p>
-            </div>
-          </div>
-          <div
-            class="flex flex-col gap-5 w-full px-7 py-8 rounded-lg bg-c_white3"
-          >
-            <i
-              class="fa-solid fa-circle text-[#8BC5E5] flex 2xl:hidden text-[35px]"
-            ></i>
-            <i
-              class="fa-solid fa-bolt text-[#8BC5E5] hidden 2xl:flex text-[35px]"
-            ></i>
-            <div class="flex flex-col gap-3">
-              <h1 class="text-c_black text-xl font-medium">Branding</h1>
-              <p class="text-c_gray font-medium w-[270px]">
-                text-xl We realize ideas from simple to complex, everything
-                becomes easy to use and reach the most potential customers.
-              </p>
-            </div>
-          </div>
-          <div
-            class="flex flex-col gap-5 w-full px-7 py-8 rounded-lg bg-c_white3"
-          >
-            <i
-              class="fa-solid fa-circle text-[#58C27D] flex 2xl:hidden text-[35px]"
-            ></i>
-            <i
-              class="fa-solid fa-gift text-[#58C27D] hidden 2xl:flex text-[35px]"
-            ></i>
-            <div class="flex flex-col gap-3">
-              <h1 class="text-c_black text-xl font-medium">UI & UX Design</h1>
-              <p class="text-c_gray font-medium w-[270px]">
-                text-xl We realize ideas from simple to complex, everything
-                becomes easy to use and reach the most potential customers.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PART 6 -->
-
-      <section
-        class="px-5 py-3 md:px-7 md:py-5 lg:px-10 2xl:px-32 2xl:py-5 mt-10 flex flex-col gap-5 lg:gap-10"
-      >
-        <div class="flex flex-col items-center lg:hidden">
-          <img src="./images/rotashow.png" alt="" />
-          <img src="./images/waves.png" alt="" />
-          <img src="./images/rotashow.png" alt="" />
-          <img src="./images/travelers.png" alt="" />
-        </div>
-        <div class="hidden flex-row items-center justify-center lg:flex">
-          <div class="h-40 w-0.5 bg-c_white3"></div>
-          <div class="flex flex-col">
-            <img src="./images/rotashow.png" alt="" />
-            <img src="./images/waves.png" alt="" />
-          </div>
-          <div class="h-40 w-0.5 bg-c_white3"></div>
-          <div class="flex flex-col">
-            <img src="./images/rotashow.png" alt="" />
-            <img src="./images/travelers.png" alt="" />
-          </div>
-          <div class="h-40 w-0.5 bg-c_white3"></div>
-          <div class="flex flex-col">
-            <img src="./images/rotashow.png" alt="" />
-            <img src="./images/waves.png" alt="" />
-          </div>
-        </div>
-      </section>
-
-      <!-- PART 7 -->
-
-      <section
-        class="px-5 py-3 md:px-7 md:py-5 lg:px-10 2xl:px-32 2xl:py-5 mt-20 flex flex-col items-center gap-10 lg:gap-20"
-      >
-        <h1
-          class="text-center text-c_black text-4xl xl:text-5xl font-bold w-1/2"
-        >
-          Frequently asked questions
-        </h1>
-        <div
-          id="selectMobile"
-          class="lg:hidden flex flex-row items-center justify-between border border-c_silver rounded-3xl px-5 text-c_black w-full py-2 sm:w-96"
-        >
-          <h1 id="selectTxt" class="text-xl font-medium">General</h1>
-          <i class="fa-solid fa-angle-down"></i>
-        </div>
-        <div id="options" class="hidden flex-col gap-3 text-lg font-medium text-c_silver select-none">
-          <h1 id="generalM" class="rounded-3xl bg-c_dark text-c_white px-4 py-1 cursor-pointer duration-200">General</h1>
-          <h1 id="supportM" class="rounded-3xl px-4 py-1 cursor-pointer duration-200">Support</h1>
-          <h1 id="hostingM" class="rounded-3xl px-4 py-1 cursor-pointer duration-200">Hosting</h1>
-          <h1 id="productM" class="rounded-3xl px-4 py-1 cursor-pointer duration-200">Product</h1>
-        </div>
-        <div
-          class="hidden lg:flex flex-row items-center gap-5 text-lg font-medium text-c_silver select-none"
-        >
-          <div
-            id="general"
-            class="rounded-3xl bg-c_dark text-c_white px-4 py-1 cursor-pointer duration-200"
-          >
-            General
-          </div>
-          <div
-            id="support"
-            class="rounded-3xl px-4 py-1 cursor-pointer duration-200"
-          >
-            Support
-          </div>
-          <div
-            id="hosting"
-            class="rounded-3xl px-4 py-1 cursor-pointer duration-200"
-          >
-            Hosting
-          </div>
-          <div
-            id="product"
-            class="rounded-3xl px-4 py-1 cursor-pointer duration-200"
-          >
-            Product
-          </div>
-        </div>
-        <div class="flex flex-col gap-5">
-          <!-- ACCOR 1 -->
-
-          <div
-            class="flex flex-col gap-3 w-[300px] sm:w-[400px] lg:w-[500px] xl:w-[600px] duration-300"
-          >
-            <div
-              class="flex flex-row items-center justify-between text-c_black font-medium text-lg lg:text-xl"
-            >
-              <details onclick="sum('sum1')" class="w-full">
-                <summary class="flex flex-row items-center justify-between">
-                  <div class="flex flex-row items-center gap-3.5">
-                    <h1 id="accor_txt1" class="text-c_silver font-bold">01</h1>
-                    <p class="">How does it work?</p>
-                  </div>
-                  <i id="sum1" class="fa-solid fa-angle-down"></i>
-                </summary>
-                <p class="mt-5 text-c_gray font-mono">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Facilis, ipsum esse vitae eos et perferendis voluptatum enim,
-                  error nemo quod animi, quidem itaque quia.
-                </p>
-              </details>
-            </div>
-            <div class="w-full h-[1px] bg-c_silver"></div>
-          </div>
-
-          <!-- ACCOR 2 -->
-          <div
-            class="flex flex-col gap-3 w-[300px] sm:w-[400px] lg:w-[500px] xl:w-[600px] duration-300"
-          >
-            <div
-              class="flex flex-row items-center justify-between text-c_black font-medium text-lg lg:text-xl"
-            >
-              <details onclick="sum('sum2')" class="w-full">
-                <summary class="flex flex-row items-center justify-between">
-                  <div class="flex flex-row items-center gap-3.5">
-                    <h1 id="accor_txt2" class="text-c_silver font-bold">02</h1>
-                    <p class="">How can i set up a new website?</p>
-                  </div>
-                  <i
-                    id="sum2"
-                    class="fa-solid fa-angle-down hidden sm:flex"
-                  ></i>
-                </summary>
-                <p class="mt-5 text-c_gray font-mono">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Facilis, ipsum esse vitae eos et perferendis voluptatum enim,
-                  error nemo quod animi, quidem itaque quia.
-                </p>
-              </details>
-            </div>
-            <div class="w-full h-[1px] bg-c_silver"></div>
-          </div>
-
-          <!-- ACCOR 3 -->
-          <div
-            class="flex flex-col gap-3 w-[300px] sm:w-[400px] lg:w-[500px] xl:w-[600px] duration-300"
-          >
-            <div
-              class="flex flex-row items-center justify-between text-c_black font-medium text-lg lg:text-xl"
-            >
-              <details onclick="sum('sum3')" class="w-full">
-                <summary class="flex flex-row items-center justify-between">
-                  <div class="flex flex-row items-center gap-3.5">
-                    <h1 id="accor_txt3" class="text-c_silver font-bold">03</h1>
-                    <p class="">How does it work?</p>
-                  </div>
-                  <i id="sum3" class="fa-solid fa-angle-down"></i>
-                </summary>
-                <p class="mt-5 text-c_gray font-mono">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Facilis, ipsum esse vitae eos et perferendis voluptatum enim,
-                  error nemo quod animi, quidem itaque quia.
-                </p>
-              </details>
-            </div>
-            <div class="w-full h-[1px] bg-c_silver"></div>
-          </div>
-
-          <!-- ACCOR 4 -->
-          <div
-            class="flex flex-col gap-3 w-[300px] sm:w-[400px] lg:w-[500px] xl:w-[600px] duration-300"
-          >
-            <div
-              class="flex flex-row items-center justify-between text-c_black font-medium text-lg lg:text-xl"
-            >
-              <details onclick="sum('sum4')" class="w-full">
-                <summary class="flex flex-row items-center justify-between">
-                  <div class="flex flex-row items-center gap-3.5">
-                    <h1 id="accor_txt4" class="text-c_silver font-bold">04</h1>
-                    <p class="">How does it work?</p>
-                  </div>
-                  <i id="sum4" class="fa-solid fa-angle-down"></i>
-                </summary>
-                <p class="mt-5 text-c_gray font-mono">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Facilis, ipsum esse vitae eos et perferendis voluptatum enim,
-                  error nemo quod animi, quidem itaque quia.
-                </p>
-              </details>
-            </div>
-            <div class="w-full h-[1px] bg-c_silver"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PART 8 -->
-
-      <section
-        class="px-5 py-3 md:px-7 md:py-5 lg:px-10 2xl:px-32 2xl:py-5 mt-20 flex flex-col gap-5 lg:gap-20"
-      >
-        <!-- TITLE -->
-
-        <div class="flex flex-col items-center gap-3 lg:gap-5">
-          <h1
-            class="text-4xl text-c_black font-bold w-3/4 lg:w-full lg:text-5xl text-center"
-          >
-            Recommended pickup locations
-          </h1>
-          <p class="text-c_gray text-lg lg:text-xl">
-            A lot of amazing experiences 🏝
-          </p>
-        </div>
-
-        <!-- CARDS -->
-        <div class="flex flex-row gap-5 overflow-x-scroll">
-          <!-- CARD 1 -->
-
-          <div
-            class="flex flex-col items-start gap-14 px-5 py-5 rounded-3xl border-2 border-c_silver hover:border-c_gray"
-          >
-            <h1
-              class="font-bold px-3 py-1 bg-c_silver rounded-3xl text-c_black"
-            >
-              128
-            </h1>
-            <div class="flex flex-col gap-3">
-              <i class="fa-solid fa-car text-c_black text-3xl"></i>
-              <div>
-                <h1 class="text-c_black text-lg font-medium">
-                  South Virgilland
-                </h1>
-                <p class="text-c_gray font-medium w-60">
-                  From Rs. 1,461 per day
-                </p>
+              <div
+                class="flex flex-row items-center justify-between border border-c_silver rounded-md pr-3"
+              >
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Email"
+                  class="w-60 px-3 py-1.5 text-c_black bg-inherit cursor-pointer focus-within:outline-none"
+                />
+                <i class="fa-solid fa-envelope text-c_black"></i>
+              </div>
+              <div
+                class="flex flex-row items-center justify-between border border-c_silver rounded-md pr-3"
+              >
+                <input
+                  id="password"
+                  type="password"
+                  placeholder="Password"
+                  class="w-60 px-3 py-1.5 text-c_black bg-transparent focus-within:outline-none"
+                />
+                <i onclick="document.getElementById('password').setAttribute('type', 'text')" class="fa-solid fa-lock text-c_black cursor-pointer"></i>
               </div>
             </div>
-          </div>
-
-          <!-- CARD 2 -->
-
-          <div
-            class="flex flex-col items-start gap-14 px-5 py-5 rounded-3xl border-2 border-c_silver hover:border-c_gray"
-          >
-            <h1
-              class="font-bold px-3 py-1 bg-c_silver rounded-3xl text-c_black"
+            <button
+              type="submit"
+              class="py-1 bg-red-500 text-white rounded-md font-bold text-lg focus:outline-none"
             >
-              256
-            </h1>
-            <div class="flex flex-col gap-3">
-              <i class="fa-solid fa-car text-c_black text-3xl"></i>
-              <div>
-                <h1 class="text-c_black text-lg font-medium">Purdyhaven</h1>
-                <p class="text-c_gray font-medium w-60">
-                  From Rs. 1,461 per day
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- CARD 3 -->
-
-          <div
-            class="flex flex-col items-start gap-14 px-5 py-5 rounded-3xl border-2 border-c_silver hover:border-c_gray"
-          >
-            <h1
-              class="font-bold px-3 py-1 bg-c_silver rounded-3xl text-c_black"
-            >
-              128
-            </h1>
-            <div class="flex flex-col gap-3">
-              <i class="fa-solid fa-car text-c_black text-3xl"></i>
-              <div>
-                <h1 class="text-c_black text-lg font-medium">Port Jarrett</h1>
-                <p class="text-c_gray font-medium w-60">
-                  From Rs. 1,461 per day
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- CARD 4 -->
-
-          <div
-            class="flex flex-col items-start gap-14 px-5 py-5 rounded-3xl border-2 border-c_silver hover:border-c_gray"
-          >
-            <h1
-              class="font-bold px-3 py-1 bg-c_silver rounded-3xl text-c_black"
-            >
-              256
-            </h1>
-            <div class="flex flex-col gap-3">
-              <i class="fa-solid fa-car text-c_black text-3xl"></i>
-              <div>
-                <h1 class="text-c_black text-lg font-medium">New Kristian</h1>
-                <p class="text-c_gray font-medium w-60">
-                  From Rs. 1,461 per day
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- CARD 5 -->
-
-          <div
-            class="flex flex-col items-start gap-14 px-5 py-5 rounded-3xl border-2 border-c_silver hover:border-c_gray"
-          >
-            <h1
-              class="font-bold px-3 py-1 bg-c_silver rounded-3xl text-c_black"
-            >
-              128
-            </h1>
-            <div class="flex flex-col gap-3">
-              <i class="fa-solid fa-car text-c_black text-3xl"></i>
-              <div>
-                <h1 class="text-c_black text-lg font-medium">Demetrisfort</h1>
-                <p class="text-c_gray font-medium w-60">
-                  From Rs. 1,461 per day
-                </p>
-              </div>
-            </div>
+              Login
+            </button>
           </div>
         </div>
-
-        <!-- LAST -->
-
-        <div class="flex flex-row justify-center items-center gap-5">
-          <i
-            class="fa-solid fa-arrow-left text-c_black px-3.5 py-3 border-2 border-c_gray rounded-3xl"
-          ></i>
-          <i
-            class="fa-solid fa-arrow-right text-c_black px-3.5 py-3 border-2 border-c_gray rounded-3xl"
-          ></i>
-        </div>
-      </section>
-    </main>
-
-    <footer
-      class="px-5 py-5 md:px-7 md:py-5 lg:px-10 2xl:px-32 2xl:py-5 mt-20 flex flex-col gap-20 lg:gap-20"
-    >
-      <div
-        class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-16"
-      >
-        <div class="flex flex-row items-center gap-2">
-          <img src="./images/Fleet symbol.svg" alt="" class="" />
-          <h1 class="text-2xl font-bold text-c_black">fleet</h1>
-        </div>
-        <div>
-          <div class="flex lg:hidden flex-row items-center justify-between">
-            <ul class="flex flex-col gap-5 font-medium text-lg text-c_gray">
-              <li>About</li>
-              <li>Projects</li>
-              <li>What We Do</li>
-            </ul>
-            <ul class="flex flex-col gap-5 font-medium text-lg text-c_gray">
-              <li>Press</li>
-              <li>Jobs</li>
-              <li>Download</li>
-            </ul>
-          </div>
-          <div class="hidden lg:flex flex-row items-center gap-12 xl:gap-20">
-            <ul class="flex flex-col gap-5 font-medium text-lg text-c_gray">
-              <li>About</li>
-              <li>Projects</li>
-            </ul>
-            <ul class="flex flex-col gap-5 font-medium text-lg text-c_gray">
-              <li>What We Do</li>
-              <li>Press</li>
-            </ul>
-            <ul class="flex flex-col gap-5 font-medium text-lg text-c_gray">
-              <li>Jobs</li>
-              <li>Download</li>
-            </ul>
-          </div>
-        </div>
-        <div class="flex flex-col gap-4">
-          <p class="text-c_black font-bold text-xl">Join our community 🔥</p>
-          <div
-            class="px-3 py-1.5 w-[320px] border-2 border-c_silver rounded-full flex flex-row items-center justify-between"
-          >
-            <input
-              type="text"
-              placeholder="Enter your email"
-              class="placeholder:text-c_gray bg-transparent outline-none"
-            />
-            <i
-              class="fa-solid fa-arrow-right text-c_white bg-c_blue px-3 py-2.5 rounded-3xl active:opacity-80 cursor-pointer"
-            ></i>
+      </form>
+      <div id="alert" class="bg-c_black px-5 py-3 rounded-md absolute -top-40 right-0 left-0 m-auto w-72 flex flex-col gap-2 duration-700">
+        <h1 class="text-3xl font-bold text-red-500 text-center">Error!</h1>
+        <div class="flex flex-col gap-2">
+          <p id="warning" class="w-44 text-c_silver font-bold leading-5"></p>
+          <div class="flex justify-end">
+            <button type="submit" onclick="document.getElementById('alert').style.top = '-160px'" class=" px-3 py-1 bg-red-500 text-white font-bold rounded-md text-lg duration-700">Ok!</button>
           </div>
         </div>
       </div>
-      <h1 class="text-c_black">
-        Copyright © 2021 UI8 LLC. All rights reserved
-      </h1>
-    </footer>
-    <script src="./app.js"></script>
+    </div>
+    <script src="preview.js"></script>
   </body>
 </html>
